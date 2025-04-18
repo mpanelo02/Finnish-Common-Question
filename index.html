@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <title>Suomenkielinen Kysymyspyörä</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 25px;
+      margin: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      background-color: #007bff;
+      color: white;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #audioPlayer {
+      margin-top: 20px;
+      width: 300px;
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎡 Satunnainen kysymys</h1>
+  <button onclick="getRandomQuestion()">Kiepausta!</button>
+  <button onclick="repeatQuestion()">🔁 Toista</button>
+  <audio id="audioPlayer" controls></audio>
+
+  <script>
+    // Array of audio file paths for each question
+    const questionAudios = [
+      "Viikonloppuna.mp3",
+      "aamulla.mp3",
+      "tanaan.mp3",
+      "eilen.mp3",
+      "koulu.mp3",
+      "lomaa.mp3",
+      "lomalla.mp3",
+      "lomalle.mp3",
+      "keskustaan.mp3",
+      "Kanssa.mp3",
+      "ruoasta.mp3",
+      "hedelmaa.mp3",
+      "aina.mp3",
+      "saasta.mp3",
+      "talvesta.mp3",
+      "opiskelet.mp3",
+      "lahjaksi.mp3",
+      "puhut.mp3",
+      "suomea.mp3",
+      "asut.mp3",
+      "sinulla-on.mp3",
+      "olohuoneessa.mp3"
+    ];
+
+    // Corresponding text for each question (for accessibility/display if needed)
+    const questionTexts = [
+      "Mitä sinä teet viikonloppuna?",
+      "Mitä sinä syöt yleensä aamulla?",
+      "Miltä tulit kurssille tänään?",
+      "Mihin aikaan menit nukkumaan eilen?",
+      "Milloin sinulla alkaa koulu?",
+      "Milloin sinulla on lomaa?",
+      "Mihin matkustat lomalla?",
+      "Kenen kanssa menet lomalle?",
+      "Miten/millä sinä pääset Helsingin keskustaan?",
+      "Mitä juot ruoan kanssa?",
+      "Mitä sinä pidät suomalaisesta ruoasta?",
+      "Sano neljä hedelmää.",
+      "Mitä sinun jääkaapissa on aina?",
+      "Mitä mieltä olet tämän päivän säästä?",
+      "Mitä mieltä olet Suomen talvesta?",
+      "Mitä sinä opiskelet?",
+      "Mitä sinä haluat syntymäpäivälahjaksi?",
+      "Mitä kieliä sinä puhut?",
+      "Puhutko suomea?",
+      "Missä sinä asut?",
+      "Millainen asunto sinulla on?",
+      "Mitä sinun olohuoneessa on?"
+    ];
+
+    let currentAudioIndex = -1;
+    const audioPlayer = document.getElementById('audioPlayer');
+
+    function getRandomQuestion() {
+      const randomIndex = Math.floor(Math.random() * questionAudios.length);
+      currentAudioIndex = randomIndex;
+      playQuestion(randomIndex);
+    }
+
+    function repeatQuestion() {
+      if (currentAudioIndex >= 0) {
+        playQuestion(currentAudioIndex);
+      }
+    }
+
+    function playQuestion(index) {
+      audioPlayer.src = questionAudios[index];
+      audioPlayer.play().catch(e => console.error("Audio play failed:", e));
+      
+      // Optional: Display the corresponding text
+      console.log("Playing question:", questionTexts[index]);
+    }
+
+    // Preload audio files for better performance
+    function preloadAudios() {
+      questionAudios.forEach(audioSrc => {
+        const audio = new Audio();
+        audio.src = audioSrc;
+      });
+    }
+
+    // Start preloading when page loads
+    window.onload = preloadAudios;
+  </script>
+</body>
+</html>
