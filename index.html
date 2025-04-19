@@ -8,6 +8,7 @@
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 50px;
+      background-color: #fcc890;
     }
     button {
       font-size: 18px;
@@ -30,10 +31,11 @@
   </style>
 </head>
 <body>
-  <h1>🎡 Satunnainen kysymys</h1>
+  <h1>🎰 Satunnainen kysymys</h1>
   <br />
   <button onclick="getRandomQuestion()">Kiepausta!</button>
   <button onclick="repeatQuestion()">🔁 Toista</button>
+  <br />
   <br />
   <audio id="audioPlayer" controls></audio>
 
@@ -124,5 +126,6 @@
     // Start preloading when page loads
     window.onload = preloadAudios;
   </script>
+
 </body>
 </html>
